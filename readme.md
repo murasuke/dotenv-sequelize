@@ -1,6 +1,31 @@
-# sequelizeの接続設定を環境変数から構成する方法
+# sequelizeの接続設定を環境変数(.env)で設定する
 
-* `config.use_env_variable`を使うことで環境変数から設定することができますが、もっと柔軟にするために「config.json」を「config.js」に変更して環境変数から柔軟に変更できるようにします
+## 前書き
+
+* sequelizeはcliを利用することで、設定ファイル(config.json)、Model、Migration、Seederのひな形を作ることができて便利です。
+
+* しかし設定ファイル(config.json)はリテラルで記述されるため、環境ごとに書き換える必要があることや、セキュリティー的にファイルに直接記載するのはどうかと思います。
+
+* そこで、環境変数(もしくは.envファイル)から設定を読み込んで実行ができるようにします（もちろんMigration、Seed時の設定も環境変数で設定します）
+
+## 修正のポイント
+
+1. `config.json`を`config.js`変更し、jsファイルを読み込むようにします。
+
+1. jsファイル内でdotenvライブラリを読み込み、.envの設定をロードします。
+
+1. `config.js`でexportする`config`オブジェクトの内容を環境変数でセットします。
+
+## 詳細手順
+
+### 準備
+
+
+1. プロジェクトのルートフォルダに `.sequelizerc`ファイルを作成し、設定ファイル、model、migration、seeederの各フォルダを明示的に指定します。
+
+1. 
+
+* `config.use_env_variable`を使うことで環境変数から設定することができますが、migrationやseedには利用できず不便です。もっと柔軟にするために「config.json」を「config.js」に変更して環境変数から柔軟に変更できるようにします
 
 ```bash
 npm init -y
@@ -77,5 +102,3 @@ module.exports = config;
 
 ```
 
-
-## 参考 環境変数「use_env_variable」を利用する場合
