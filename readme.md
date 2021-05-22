@@ -1,12 +1,12 @@
 # sequelizeを`.env`で設定する方法
 
-  * 一言で説明すると「config.json」⇒「config.js」にして`require('dotenv').config();`すれば、後は`process.env`の値を埋め込めますという話です。
+  * 1行にまとめると「config.json」⇒「config.js」にして`require('dotenv').config();`すれば、後は`process.env`の値を埋め込めます。
 
 ## 前書き
 
 * sequelizeはcliを利用することで、設定ファイル(config.json)、Model、Migration、Seederのひな形を作ることができて便利ですが、DB接続設定がファイルに直書きされるため不便な場合があります。
 
-* しかし設定ファイル(config.json)を書き換えて、`config.use_env_variable`を利用すれば環境変数使えますが、.envで動的に書き換えることはできません(jsonが静的なので)
+* 設定ファイル(config.json)を書き換えて、`config.use_env_variable`を利用すれば環境変数使えますが、.envで書き換えることはできません(読み込む場所がない)
 
 * そこで、config.jsonをconfig.jsに変更し、.envから設定を読み込んで実行ができるようにします。
   もちろんmigration、seederも.envで設定します。
@@ -35,25 +35,11 @@ package.json は下記のようになります。
 ```
 
 
-* プロジェクトのルートフォルダに `.sequelizerc`ファイルを作成します。ポイントは`config.js`で作成することです(jsonではなく)
+## sequelizeの初期化を行う前に設定ファイル`.sequelizerc`をプロジェクトルートに作成します
 
 ```bash
 touch .sequelizerc
 ```
-
-``` javascript
-const path = require('path');
-
-module.exports = {
-    'config': path.resolve('./sequelize/config', 'config.js'),
-    'models-path': path.resolve('./sequelize/models'),
-    'seeders-path': path.resolve('./sequelize/seeders'),
-    'migrations-path': path.resolve('./sequelize/migrations'),
-};
-```
-
-1
-## sequelizeの初期化を行う前に設定ファイル`.sequelizerc`をプロジェクトルートに作成します。
 
 ポイントは2つ
 * sequelizeフォルダ配下にファイルをまとめます
