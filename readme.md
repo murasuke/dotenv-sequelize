@@ -1,4 +1,4 @@
-# sequelizeを`.env`で設定する方法
+# sequelizeの接続設定を`.env`で行う手順
 
   * 1行にまとめると「config.json」⇒「config.js」にして`require('dotenv').config();`すれば、後は`process.env`の値を埋め込めます。
 
