@@ -2,6 +2,8 @@
 
   * 1行にまとめると「config.json」⇒「config.js」にして`require('dotenv').config();`すれば、後は`process.env`の値を埋め込めます。
 
+  [環境変数で設定する方法](https://github.com/murasuke/sequelize-use-env-variable) はこちらです
+
 ## 前書き
 
 * sequelizeはcliを利用することで、設定ファイル(config.json)、Model、Migration、Seederのひな形を作ることができて便利ですが、DB接続設定がファイルに直書きされるため不便な場合があります。
